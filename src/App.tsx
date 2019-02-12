@@ -1,57 +1,53 @@
-import React, { useRef, useState, useEffect, MutableRefObject, FormEvent } from 'react';
-import './App.css';
+import React, {
+  useRef,
+  useState,
+  useEffect,
+  MutableRefObject,
+  FormEvent
+} from "react";
+import Header from "./components/Header";
+import Form from "./components/Form";
+import List from "./components/List";
+import "./App.css";
 
-function App() {
-  const inputElement: MutableRefObject<HTMLInputElement> = useRef(document.createElement("input"));
+const App: React.FunctionComponent = () => {
+  const inputElement: MutableRefObject<HTMLInputElement> = useRef(
+    document.createElement("input")
+  );
 
   const [todos, setTodos] = useState([
-    'learn typescript',
-    'use typescript with react'
+    "learn typescript",
+    "use typescript with react"
   ]);
 
-  const [newTodo, setNewTodo] = useState('');
+  const [newTodo, setNewTodo] = useState("");
 
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
 
   useEffect(() => {
-    setIsButtonDisabled(newTodo === '');
-    inputElement.current.focus()
+    setIsButtonDisabled(newTodo === "");
+    inputElement.current.focus();
   });
 
   function handleSubmit(event: FormEvent<HTMLFormElement>): void {
     setTodos(todos.concat([newTodo]));
-    setNewTodo('')
+    setNewTodo("");
     event.preventDefault();
   }
 
   return (
     <div className="App">
-      <h1>todo app using hooks</h1>
-      <form action="submit" onSubmit={handleSubmit}>
-        <input
-          ref={inputElement}
-          type="text"
-          name="todo"
-          id="todo"
-          placeholder="write a new todo"
-          value={newTodo}
-          onChange={event => setNewTodo(event.target.value)}
-        />
-        <button
-          type="submit"
-          disabled={isButtonDisabled}
-          className={isButtonDisabled ? 'disabled-button' : 'enabled-button'}
-        >
-          add
-        </button>
-      </form>
-      <ul>
-        {todos.map(todo => (
-          <li key={todo}>{todo}</li>
-        ))}
-      </ul>
+      <Header title="todo" features={["typescript", "hooks"]} />
+      <Form
+        handleSubmit={handleSubmit}
+        inputElement={inputElement}
+        newTodo={newTodo}
+        setNewTodo={setNewTodo}
+        isButtonDisabled={isButtonDisabled}
+      />
+      <List todos={todos} />
     </div>
   );
-}
+};
 
 export default App;

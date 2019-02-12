@@ -8,6 +8,13 @@
   font-size: calc(10px + 2vmin);
 }
 
+h1 {
+  margin-bottom: 0;
+}
+h2 {
+  margin-top: 0;
+}
+
 .disabled-button {
   all: unset;
   margin: 20px;
@@ -32,6 +39,7 @@
 form {
   display: flex;
   flex-direction: column;
+  margin-top: 20px;
 }
 
 input {
