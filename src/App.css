@@ -34,15 +34,25 @@ form {
   flex-direction: column;
 }
 
+input {
+  -webkit-appearance: none;
+  padding: 5px;
+  font-size: calc(6px + 2vmin);
+  color: purple;
+  background-color: whitesmoke;
+}
+
 ul {
   list-style: none;
   padding: 0;
+  font-size: calc(8px + 2vmin);
 }
 
 li {
   text-align: center;
   margin: 10px;
   padding: 5px;
+  min-width: 600px;
   border-radius: 10px;
   text-align: center;
   width: 300px;

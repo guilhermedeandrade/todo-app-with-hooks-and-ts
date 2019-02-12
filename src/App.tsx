@@ -1,7 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect, MutableRefObject, FormEvent } from 'react';
 import './App.css';
 
 function App() {
+  const inputElement: MutableRefObject<HTMLInputElement> = useRef(document.createElement("input"));
+
   const [todos, setTodos] = useState([
     'learn typescript',
     'use typescript with react'
@@ -13,10 +15,12 @@ function App() {
 
   useEffect(() => {
     setIsButtonDisabled(newTodo === '');
+    inputElement.current.focus()
   });
 
-  function handleSubmit(event: any): void {
+  function handleSubmit(event: FormEvent<HTMLFormElement>): void {
     setTodos(todos.concat([newTodo]));
+    setNewTodo('')
     event.preventDefault();
   }
 
@@ -25,6 +29,7 @@ function App() {
       <h1>todo app using hooks</h1>
       <form action="submit" onSubmit={handleSubmit}>
         <input
+          ref={inputElement}
           type="text"
           name="todo"
           id="todo"
